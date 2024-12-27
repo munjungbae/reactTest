@@ -10,6 +10,14 @@
 // console.log(sub(2,5));
 
 //ESM모듈 가져오기
-import {add,sub} from './math.js';
+import {add, sub} from './math.js';
+import multiply from './math.js'; // math.js에서 단 한가지만 디폴트로 설정할 수 있으며 이를 괄호 없이 호출 가능.
+import randomcolor from 'randomcolor';
+
+const colorString = randomcolor();
+
+console.log(colorString);
+
 console.log(add(2,5));
 console.log(sub(2,5));
+console.log(multiply(2,5));
