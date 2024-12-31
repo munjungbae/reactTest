@@ -1,0 +1,8 @@
+.list{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    position: relative;
+    left: 255px;
+}
+
