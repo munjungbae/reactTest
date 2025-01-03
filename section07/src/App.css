@@ -1,0 +1,25 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  padding: 30px;
+}
+
+.app{
+  margin: 0 auto;
+  width: 400px;
+}
+
+.app > section {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.app > h1 {
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
