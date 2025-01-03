@@ -1,0 +1,9 @@
+/* 폰트 적용방법 */
+@font-face {
+    font-family: "NanumPenScript";
+    src: url('/public/NanumPenScript-Regular.ttf');
+}
+
+body {
+    font-family: "NanumPenScript";
+}

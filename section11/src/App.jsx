@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
 import Exam from './components/Exam'
-import {useReducer, useRef, useCallback} from 'react';
+import { useReducer, useRef, useCallback, createContext, useMemo } from 'react';
 //app에서 이벤트 정의 후 넘기기 (update, insert, delete ...)
 //select 는 값만 넘긴 뒤 그 값으로 정의
 //가상의 데이터 ( Mount => 서버에서 데이터를 가져온다)
@@ -43,6 +43,10 @@ function reducer(state, action) {
   }
 }
 
+//JSP의 session 개념
+export const TodoStateContext = createContext();
+export const TodoDispatchContext = createContext();
+
 function App() {
   const [todos, dispatch] = useReducer(reducer,mockData);
   const idRef = useRef(3);
@@ -60,7 +64,7 @@ function App() {
   // };
 
   //위의 onInsert를 useCallback으로 전환 ( 해당 함수를 Mount 할 때 한번만 실행 )
-  const onInsert1 = useCallback((data)=>{
+  const onInsert = useCallback((data)=>{
     dispatch({
       type: "INSERT",
       data: {
@@ -82,7 +86,7 @@ function App() {
   // };
 
   //위의 onUpdate를 useCallback으로 전환 ( 해당 함수를 Mount 할 때 한번만 실행 )
-  const onUpdate1 = useCallback((targetId)=>{
+  const onUpdate = useCallback((targetId)=>{
     dispatch ({
       type: "UPDATE",
       data: targetId,
@@ -98,21 +102,33 @@ function App() {
   // }
 
   //위의 onDelete를 useCallback으로 전환 ( 해당 함수를 Mount 할 때 한번만 실행 )
-  const onDelete1 = useCallback((targetId)=>{
+  const onDelete = useCallback((targetId)=>{
     dispatch({
       type:"DELETE",
       data: targetId,
     })
   },[])
   
+//TodoDispatchContext.Provider를 위한 useMemo를 생성.
+  const memoDispatch = useMemo(()=>{
+    return (onInsert, onUpdate, onDelete)
+  },[]);
+
+
   return (
     <>
     <div className='app'>
-      <Header/>
       <Exam/>
-      <Editor onIsert={onInsert1} />
-      <List todos={todos} onUpdate={onUpdate1} onDel={onDelete1}/>
-    </div>
+      <Header/>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={{memoDispatch}}>
+      {/* <Editor onIsert={onInsert1}/> */}
+      <Editor/>
+      {/* <List todos={todos} onUpdate={onUpdate1} onDel={onDelete1}/> */}
+      <List/>
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
+    </div>  
     </>
   )
 }

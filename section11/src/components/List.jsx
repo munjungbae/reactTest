@@ -1,9 +1,12 @@
 import './List.css';
 import ListItem from './ListItem';
-import {useMemo, useState} from 'react';
+import {useMemo, useState, useContext} from 'react';
+import { TodoStateContext } from '../App';
 
-const List = ({todos, onUpdate, onDel}) => {
+const List = () => {
+    const todos =  useContext(TodoStateContext);
     const [search, setSearch] = useState('');
+    
     const onChangeSearch = (e) => {
         setSearch(e.target.value);
     };
@@ -56,7 +59,8 @@ const List = ({todos, onUpdate, onDel}) => {
             <div className='item'>
                 {filterItem.map((object/*, index, array*/)=>{
                     //map으로 값을 받아 올 시 여러 값이 전달되기 때문에 구별 할 수 있는 key값을 전달해야 한다.
-                    return <ListItem key={object.id} {...object} onUpdate={onUpdate} onD={onDel}/>;
+                    // return <ListItem key={object.id} {...object} onUpdate={onUpdate} onD={onDel}/>;
+                    return <ListItem key={object.id} {...object}/>;
                 })}
             </div>
         </>
