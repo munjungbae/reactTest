@@ -1,6 +1,6 @@
 import "./App.css";
 import { useReducer, useRef, createContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
 import New from "./pages/New";
@@ -80,16 +80,22 @@ function App() {
       id,
     });
   };
+  //쿼리스트링으로 이벤트페이지 요청하기
+  const nav = useNavigate();
+  const onClickButton = () => {
+    nav("/new?value=hello");
+  };
+
   return (
     <>
+      {/* 동적 라우팅 추가 */}
+      <Link to="/new?value=hello"> New</Link>
+      <Link to="/diary/1"> New</Link>
+      <button onClick={onClickButton}>
+        쿼리스트링으로 이벤트 페이지 요청하기
+      </button>
       <DiaryStateContext.Provider value={data}>
-        <DiaryDispatchContext.Provider
-          value={{
-            onCreate,
-            onUpdate,
-            onDelete,
-          }}
-        >
+        <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/new" element={<New />} />
