@@ -1,0 +1,24 @@
+.diary_list > .menu_bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.menu_bar > select {
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    background-color: rgb(191, 192, 193);
+    color: white;
+    border-radius: 5px;
+}
+.menu_bar > select >option {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.menu_bar > Button {
+    flex: 1;
+}

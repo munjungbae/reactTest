@@ -13,10 +13,13 @@ const ListItem = ({id, user, isDone, content, date, onUpdateIsDone, onDelete, on
     const onClickDelete = () => {
         onDelete(id);
     }
+
+    const onChangeUpdate = (e) => {
+        setContentUpdate(e.target.value);
+    }
     const onClickUpdate = () => {
         const contentInsert = prompt('내용을 입력 해 주세요')
-        setContentUpdate(contentInsert);
-        onUpdate(id, contentUpdate);
+        onUpdate(id, contentInsert);
     }
 
     return (
@@ -27,7 +30,7 @@ const ListItem = ({id, user, isDone, content, date, onUpdateIsDone, onDelete, on
            <p className='cuser'>{user}</p>
            <p className='date'>{new Date(date).toLocaleDateString()}</p>
            <button onClick={onClickDelete}>삭제</button>
-           <button value={contentUpdate} onClick={onClickUpdate}>수정</button>
+           <button value={contentUpdate} onClick={onClickUpdate} onChange={onChangeUpdate}>수정</button>
         </div>
         </div>
     );

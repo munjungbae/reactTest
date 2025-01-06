@@ -26,10 +26,7 @@ const List = ({todos, onUpdateIsDone, onDelete , onUpdate}) => {
     return (
         <>
         <div className='list'>
-        <select>
-            <option value="user">작성자</option>
-            <option value="content">제목</option>
-        </select>
+
         <input type="text" value={search} placeholder='글 제목을 입력 해 주세요' onChange={onChangeSearch}/>
         </div>
             {filterTodos.map((object)=>{

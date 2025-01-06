@@ -14,13 +14,6 @@ const mockData = [
     content: '최고',
     date : new Date().getTime(),
   },
-  {
-    id : 1,
-    isDone: false,
-    user : '문정배2',
-    content: '최고2',
-    date : new Date().getTime(),
-  },
 ];
 
 

@@ -1,7 +1,10 @@
 import './ListItem.css';
 import { memo } from 'react'
+import {useContext} from 'react';
+import { TodoDispatchContext } from '../App';
 
-const ListItem = ({id, isDone, content, date, onUpdate, onD}) => {
+const ListItem = ({id, isDone, content, date}) => {
+    const {onUpdate, onDelete} = useContext(TodoDispatchContext);
     // const[bValue, setbValue] = useState(false);
     // const clickCheck = () => {
     //     if (bValue === false) {
@@ -14,7 +17,7 @@ const ListItem = ({id, isDone, content, date, onUpdate, onD}) => {
         onUpdate(id);
     }
     const onDeleteObject = () => {
-        onD(id);
+        onDelete(id);
     }
     return (
         <div className='listItem'>
